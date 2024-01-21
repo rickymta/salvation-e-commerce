@@ -20,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Models\Salvation.Library.Models.csproj" />
     <ProjectReference Include="..\Salvation.Library.Models\Salvation.Library.Models.csproj" />
   </ItemGroup>
 
