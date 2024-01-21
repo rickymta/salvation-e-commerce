@@ -1,0 +1,62 @@
+[
+  {
+    "outputFileName": "wwwroot/bundles/providers.min.js",
+    "inputFiles": [
+      "wwwroot/js/providers/*.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/bundles/asset.min.js",
+    "inputFiles": [
+      "wwwroot/themes/assets/plugins/jquery/jquery.min.js",
+      "wwwroot/themes/assets/plugins/bootstrap/js/popper.min.js",
+      "wwwroot/themes/assets/plugins/bootstrap/js/bootstrap.min.js",
+      "wwwroot/themes/js/jquery.slimscroll.js",
+      "wwwroot/themes/js/waves.js",
+      "wwwroot/themes/js/sidebarmenu.js",
+      "wwwroot/themes/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js",
+      "wwwroot/themes/js/custom.min.js",
+      "wwwroot/themes/assets/plugins/sparkline/jquery.sparkline.min.js",
+      "wwwroot/themes/assets/plugins/raphael/raphael-min.js",
+      "wwwroot/themes/assets/plugins/morrisjs/morris.min.js",
+      "wwwroot/plugins/datatables/datatables.min.js",
+      "wwwroot/plugins/toastr/js/toastr.min.js",
+      "wwwroot/plugins/sweetalert2/dist/sweetalert2.js",
+      "wwwroot/themes/js/jquery.validate.min.js",
+      "wwwroot/themes/assets/plugins/calendar/jquery-ui.min.js",
+      "wwwroot/themes/assets/plugins/moment/moment.js",
+      "wwwroot/themes/assets/plugins/calendar/dist/fullcalendar.min.js",
+      "wwwroot/themes/assets/plugins/calendar/dist/cal-init.js",
+      "wwwroot/themes/js/jquery.validate.unobtrusive.min.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/bundles/theme.min.css",
+    "inputFiles": [
+      "wwwroot/themes/assets/plugins/bootstrap/css/bootstrap.min.css",
+      "wwwroot/themes/assets/plugins/morrisjs/morris.css",
+      "wwwroot/themes/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css",
+      "wwwroot/themes/assets/plugins/timepicker/bootstrap-timepicker.min.css",
+      "wwwroot/themes/assets/plugins/bootstrap-daterangepicker/daterangepicker.css",
+      "wwwroot/themes/assets/plugins/dropify/dist/css/dropify.min.css",
+      "wwwroot/plugins/datatables/datatables.min.css",
+      "wwwroot/plugins/toastr/css/toastr.min.css",
+      "wwwroot/plugins/sweetalert2/dist/sweetalert2.css",
+      "wwwroot/themes/assets/plugins/calendar/dist/fullcalendar.css"
+    ],
+    "minify": {
+      "enabled": false
+    },
+    "sourceMap": true
+  }
+]
