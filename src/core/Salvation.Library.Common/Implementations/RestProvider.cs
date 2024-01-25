@@ -8,10 +8,8 @@ using System.Web;
 
 namespace Salvation.Library.Common.Implementations;
 
-/// <summary>
-/// RestProvider
-/// </summary>
-public class RestProvider : IRestProvider
+///<inheritdoc/>
+internal class RestProvider : IRestProvider
 {
     /// <summary>
     /// HttpClientHandler

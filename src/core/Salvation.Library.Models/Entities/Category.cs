@@ -1,11 +1,27 @@
-﻿namespace Salvation.Library.Models.Entities
+﻿namespace Salvation.Library.Models.Entities;
+
+/// <summary>
+/// Category
+/// </summary>
+public class Category : BaseEntity
 {
-    public class Category : BaseEntity
-    {
-        public string Name { get; set; } = null!;
+    /// <summary>
+    /// Category Name
+    /// </summary>
+    public string Name { get; set; } = null!;
 
-        public string Image { get; set; } = null!;
+    /// <summary>
+    /// Category Image
+    /// </summary>
+    public string Image { get; set; } = null!;
 
-        public long ParentId { get; set; }
-    }
+    /// <summary>
+    /// Category slug
+    /// </summary>
+    public string Slug { get; set; } = null!;
+
+    /// <summary>
+    /// Category parent Id
+    /// </summary>
+    public string? ParentId { get; set; }
 }

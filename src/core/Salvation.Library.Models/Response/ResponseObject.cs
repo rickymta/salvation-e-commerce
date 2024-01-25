@@ -1,20 +1,44 @@
-﻿namespace Salvation.Library.Models.Response
+﻿namespace Salvation.Library.Models.Response;
+
+/// <summary>
+/// ResponseObject
+/// </summary>
+public class ResponseObject
 {
-    public class ResponseObject
-    {
-        public int Code { get; set; }
+    /// <summary>
+    /// Code
+    /// </summary>
+    public int Code { get; set; }
 
-        public string? Message { get; set; }
+    /// <summary>
+    /// Message
+    /// </summary>
+    public string? Message { get; set; }
 
-        public object? Data { get; set; }
-    }
+    /// <summary>
+    /// Data
+    /// </summary>
+    public object? Data { get; set; }
+}
 
-    public class ResponseObject<T>
-    {
-        public int Code { get; set; }
+/// <summary>
+/// ResponseObject<T>
+/// </summary>
+/// <typeparam name="T"></typeparam>
+public class ResponseObject<T>
+{
+    /// <summary>
+    /// Code
+    /// </summary>
+    public int Code { get; set; }
 
-        public string? Message { get; set; }
+    /// <summary>
+    /// Message
+    /// </summary>
+    public string? Message { get; set; }
 
-        public T? Data { get; set; }
-    }
+    /// <summary>
+    /// Data
+    /// </summary>
+    public T? Data { get; set; }
 }

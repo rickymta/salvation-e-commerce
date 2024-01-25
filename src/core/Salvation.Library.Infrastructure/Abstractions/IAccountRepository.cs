@@ -1,9 +1,16 @@
 ﻿using Salvation.Library.Models.Entities;
 
-namespace Salvation.Library.Infrastructure.Abstractions
+namespace Salvation.Library.Infrastructure.Abstractions;
+
+/// <summary>
+/// IAccountRepository
+/// </summary>
+public interface IAccountRepository : IGenericRepository<Account>
 {
-    public interface IAccountRepository : IGenericRepository<Account>
-    {
-        Task<Account?> GetOneByEmail(string email);
-    }
+    /// <summary>
+    /// GetOneByEmail
+    /// </summary>
+    /// <param name="email"></param>
+    /// <returns></returns>
+    Task<Account?> GetOneByEmail(string email);
 }

@@ -1,9 +1,17 @@
-﻿namespace Salvation.Library.Models.Entities
-{
-    public class ProductImage : BaseEntity
-    {
-        public long ProductId { get; set; }
+﻿namespace Salvation.Library.Models.Entities;
 
-        public string Image { get; set; } = null!;
-    }
+/// <summary>
+/// ProductImage
+/// </summary>
+public class ProductImage : BaseEntity
+{
+    /// <summary>
+    /// Foreign key of Product
+    /// </summary>
+    public long ProductId { get; set; }
+
+    /// <summary>
+    /// Product Image
+    /// </summary>
+    public string Image { get; set; } = null!;
 }

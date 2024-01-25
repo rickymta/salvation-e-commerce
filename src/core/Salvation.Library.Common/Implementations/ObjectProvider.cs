@@ -5,10 +5,8 @@ using System.Reflection;
 
 namespace Salvation.Library.Common.Implementations;
 
-/// <summary>
-/// ObjectProvider
-/// </summary>
-public class ObjectProvider : IObjectProvider
+///<inheritdoc/>
+internal class ObjectProvider : IObjectProvider
 {
     ///<inheritdoc/>
     public T ConvertEntityUpdate<T>(T entity, object update)

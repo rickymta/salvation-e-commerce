@@ -6,10 +6,8 @@ using System.Text.Json;
 
 namespace Salvation.Library.Common.Implementations;
 
-/// <summary>
-/// LogProvider
-/// </summary>
-public class LogProvider : ILogProvider
+///<inheritdoc/>
+internal class LogProvider : ILogProvider
 {
     /// <summary>
     /// PatternLog

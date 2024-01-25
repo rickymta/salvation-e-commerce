@@ -1,8 +1,10 @@
 ﻿using Salvation.Library.Models.Entities;
 
-namespace Salvation.Library.Infrastructure.Abstractions
+namespace Salvation.Library.Infrastructure.Abstractions;
+
+/// <summary>
+/// IProductRepository
+/// </summary>
+public interface IProductRepository : IGenericRepository<Product>
 {
-    public interface IProductRepository : IGenericRepository<Product>
-    {
-    }
 }

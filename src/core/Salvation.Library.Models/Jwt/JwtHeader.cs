@@ -1,5 +1,8 @@
 ﻿namespace Salvation.Library.Models.Jwt;
 
+/// <summary>
+/// JwtHeader
+/// </summary>
 public class JwtHeader
 {
     /// <summary>

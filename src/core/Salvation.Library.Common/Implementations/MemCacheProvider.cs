@@ -3,10 +3,8 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace Salvation.Library.Common.Implementations;
 
-/// <summary>
-/// CacheProvider
-/// </summary>
-public class MemCacheProvider : IMemCacheProvider
+///<inheritdoc/>
+internal class MemCacheProvider : IMemCacheProvider
 {
     /// <summary>
     /// IMemoryCache

@@ -3,10 +3,8 @@ using Microsoft.AspNetCore.Http;
 
 namespace Salvation.Library.Common.Implementations;
 
-/// <summary>
-/// CookieProvider
-/// </summary>
-public class CookieProvider : ICookieProvider
+///<inheritdoc/>
+internal class CookieProvider : ICookieProvider
 {
     /// <summary>
     /// IHttpContextAccessor

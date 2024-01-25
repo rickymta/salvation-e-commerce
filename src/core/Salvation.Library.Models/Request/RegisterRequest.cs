@@ -1,13 +1,27 @@
-﻿namespace Salvation.Library.Models.Request
+﻿namespace Salvation.Library.Models.Request;
+
+/// <summary>
+/// RegisterRequest
+/// </summary>
+public class RegisterRequest
 {
-    public class RegisterRequest
-    {
-        public string Fullname { get; set; } = null!;
+    /// <summary>
+    /// Fullname
+    /// </summary>
+    public string Fullname { get; set; } = null!;
 
-        public string Email { get; set; } = null!;
+    /// <summary>
+    /// Email
+    /// </summary>
+    public string Email { get; set; } = null!;
 
-        public string Password { get; set; } = null!;
+    /// <summary>
+    /// Password
+    /// </summary>
+    public string Password { get; set; } = null!;
 
-        public string? Address { get; set; }
-    }
+    /// <summary>
+    /// Address
+    /// </summary>
+    public string? Address { get; set; }
 }

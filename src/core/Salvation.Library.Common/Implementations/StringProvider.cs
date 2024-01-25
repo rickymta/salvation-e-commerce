@@ -4,10 +4,8 @@ using System.Text.RegularExpressions;
 
 namespace Salvation.Library.Common.Implementations;
 
-/// <summary>
-/// StringProvider
-/// </summary>
-public class StringProvider : IStringProvider
+///<inheritdoc/>
+internal class StringProvider : IStringProvider
 {
     ///<inheritdoc/>
     public string FormatNumber(object number)

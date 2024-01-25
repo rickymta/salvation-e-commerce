@@ -8,10 +8,8 @@ using System.Text.Json;
 
 namespace Salvation.Library.Common.Implementations;
 
-/// <summary>
-/// CoreApiProvider
-/// </summary>
-public class CoreApiProvider : ICoreApiProvider
+///<inheritdoc/>
+internal class CoreApiProvider : ICoreApiProvider
 {
     /// <summary>
     /// ApiUrl

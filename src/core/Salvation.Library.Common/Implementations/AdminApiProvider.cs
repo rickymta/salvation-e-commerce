@@ -5,10 +5,8 @@ using System.Collections;
 
 namespace Salvation.Library.Common.Implementations;
 
-/// <summary>
-/// ApiProvider
-/// </summary>
-public class AdminApiProvider : IAdminApiProvider
+///<inheritdoc/>
+internal class AdminApiProvider : IAdminApiProvider
 {
     /// <summary>
     /// KeyToken

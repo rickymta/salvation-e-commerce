@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{F0C1BF10-399B-4FC8-8C24-CFD721CDAADD}"
 	ProjectSection(SolutionItems) = preProject
-		database\DemoLogin.sql = database\DemoLogin.sql
+		database\SalvationEcommerce.sql = database\SalvationEcommerce.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D3AE49C5-E741-4517-9A34-DA0AEF1D0DF4}"
@@ -42,17 +42,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salvation.Services.AuthApi"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salvation.Services.AuthService", "src\services\AuthService\Salvation.Services.AuthService\Salvation.Services.AuthService.csproj", "{60D3A7C4-F0EF-4B9E-B57F-33F7B2E40D65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salvation.Services.AuthHandler", "src\services\AuthService\Salvation.Services.AuthHandler\Salvation.Services.AuthHandler.csproj", "{87E46497-4FFC-47F3-B249-81BC69D327B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salvation.Services.AuthHandler", "src\services\AuthService\Salvation.Services.AuthHandler\Salvation.Services.AuthHandler.csproj", "{87E46497-4FFC-47F3-B249-81BC69D327B9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AuthService", "AuthService", "{B4C25B93-F566-43E8-821F-E174F66BC3F3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salvation.Services.AuthApi.Test", "test\services\AuthService\Salvation.Services.AuthApi.Test\Salvation.Services.AuthApi.Test.csproj", "{D039A16D-4A6B-484D-AB82-D9D91937D606}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salvation.Services.AuthHandler.Test", "test\services\AuthService\Salvation.Services.AuthHandler.Test\Salvation.Services.AuthHandler.Test.csproj", "{218ED46D-43F6-4B5E-A5E8-6B89168D6B70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salvation.Services.AuthHandler.Test", "test\services\AuthService\Salvation.Services.AuthHandler.Test\Salvation.Services.AuthHandler.Test.csproj", "{218ED46D-43F6-4B5E-A5E8-6B89168D6B70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salvation.Services.AuthService.Test", "test\services\AuthService\Salvation.Services.AuthService.Test\Salvation.Services.AuthService.Test.csproj", "{200C3CFF-9EA5-4096-A202-9BB39F0779CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salvation.Services.AuthService.Test", "test\services\AuthService\Salvation.Services.AuthService.Test\Salvation.Services.AuthService.Test.csproj", "{200C3CFF-9EA5-4096-A202-9BB39F0779CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salvation.Presentation.WebApp", "src\presentations\Salvation.Presentation.WebApp\Salvation.Presentation.WebApp.csproj", "{21978AE4-1053-49A9-868B-7C650345E127}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salvation.Presentation.WebApp", "src\presentations\Salvation.Presentation.WebApp\Salvation.Presentation.WebApp.csproj", "{21978AE4-1053-49A9-868B-7C650345E127}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

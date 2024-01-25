@@ -1,23 +1,52 @@
-﻿namespace Salvation.Library.Infrastructure.Abstractions
+﻿namespace Salvation.Library.Infrastructure.Abstractions;
+
+/// <summary>
+/// IUnitOfWork
+/// </summary>
+public interface IUnitOfWork : IDisposable
 {
-    public interface IUnitOfWork : IDisposable
-    {
-        IAccountRepository Account { get; }
+    /// <summary>
+    /// IAccountRepository
+    /// </summary>
+    IAccountRepository Account { get; }
 
-        ICategoryRepository Category { get; }
+    /// <summary>
+    /// ICategoryRepository
+    /// </summary>
+    ICategoryRepository Category { get; }
 
-        IManufactureRepository Manufacture { get; }
+    /// <summary>
+    /// IManufactureRepository
+    /// </summary>
+    IManufactureRepository Manufacture { get; }
 
-        IProductRepository Product { get; }
+    /// <summary>
+    /// IProductRepository
+    /// </summary>
+    IProductRepository Product { get; }
 
-        IProductPropertyRepository ProductProperty { get; }
+    /// <summary>
+    /// IProductPropertyRepository
+    /// </summary>
+    IProductPropertyRepository ProductProperty { get; }
 
-        IProductDetailRepository ProductDetail { get; }
+    /// <summary>
+    /// IProductDetailRepository
+    /// </summary>
+    IProductDetailRepository ProductDetail { get; }
 
-        IProductImageRepository ProductImage { get; }
+    /// <summary>
+    /// IProductImageRepository
+    /// </summary>
+    IProductImageRepository ProductImage { get; }
 
-        void Begin();
+    /// <summary>
+    /// Begin
+    /// </summary>
+    void Begin();
 
-        void Commit();
-    }
+    /// <summary>
+    /// Commit
+    /// </summary>
+    void Commit();
 }

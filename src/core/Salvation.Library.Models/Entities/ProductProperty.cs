@@ -1,9 +1,17 @@
-﻿namespace Salvation.Library.Models.Entities
-{
-    public class ProductProperty : BaseEntity
-    {
-        public long CategoryId { get; set; }
+﻿namespace Salvation.Library.Models.Entities;
 
-        public string Name { get; set; } = null!;
-    }
+/// <summary>
+/// ProductProperty
+/// </summary>
+public class ProductProperty : BaseEntity
+{
+    /// <summary>
+    /// Foreign key of category
+    /// </summary>
+    public long CategoryId { get; set; }
+
+    /// <summary>
+    /// Property Name
+    /// </summary>
+    public string Name { get; set; } = null!;
 }

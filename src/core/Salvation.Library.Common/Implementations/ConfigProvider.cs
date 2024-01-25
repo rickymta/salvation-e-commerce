@@ -5,10 +5,8 @@ using Newtonsoft.Json.Linq;
 
 namespace Salvation.Library.Common.Implementations;
 
-/// <summary>
-/// ConfigProvider
-/// </summary>
-public class ConfigProvider : IConfigProvider
+///<inheritdoc/>
+internal class ConfigProvider : IConfigProvider
 {
     /// <summary>
     /// ILogger

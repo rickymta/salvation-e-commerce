@@ -1,8 +1,10 @@
 ﻿using Salvation.Library.Models.Entities;
 
-namespace Salvation.Library.Infrastructure.Abstractions
+namespace Salvation.Library.Infrastructure.Abstractions;
+
+/// <summary>
+/// ICategoryRepository
+/// </summary>
+public interface ICategoryRepository : IGenericRepository<Category>
 {
-    public interface ICategoryRepository : IGenericRepository<Category>
-    {
-    }
 }

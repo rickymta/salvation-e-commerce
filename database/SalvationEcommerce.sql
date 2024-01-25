@@ -27,7 +27,7 @@ create table Category (
 	Name varchar(50) not null unique,
 	Slug varchar(50) not null unique,
 	Image varchar(200) not null unique,
-	ParentId bigint default 0,
+	ParentId varchar(200) default 0,
 	IsActived bit not null default 1,
 	CreatedAt datetime default getdate(),
 	CreatedBy varchar(200),

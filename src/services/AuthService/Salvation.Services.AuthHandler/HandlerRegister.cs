@@ -12,6 +12,10 @@ namespace Salvation.Services.AuthHandler;
 /// </summary>
 public static class HandlerRegister
 {
+    /// <summary>
+    /// RegisterHandler
+    /// </summary>
+    /// <param name="services"></param>
     public static void RegisterHandler(this IServiceCollection services)
     {
         services.AddTransient<IAccountHandler, AccountHandler>();

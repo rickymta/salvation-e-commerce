@@ -6,14 +6,30 @@ using Salvation.Library.Models.Jwt.Enums;
 
 namespace Salvation.Library.Common.Implementations;
 
+///<inheritdoc/>
 internal class JwtProvider : IJwtProvider
 {
+    /// <summary>
+    /// IHashProvider
+    /// </summary>
     private readonly IHashProvider _hashProvider;
 
+    /// <summary>
+    /// IConfigProvider
+    /// </summary>
     private readonly IConfigProvider _configProvider;
 
+    /// <summary>
+    /// ILogProvider
+    /// </summary>
     private readonly ILogProvider _logProvider;
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="hashProvider"></param>
+    /// <param name="configProvider"></param>
+    /// <param name="logProvider"></param>
     public JwtProvider(IHashProvider hashProvider, IConfigProvider configProvider, ILogProvider logProvider)
     {
         _hashProvider = hashProvider;
@@ -21,6 +37,7 @@ internal class JwtProvider : IJwtProvider
         _logProvider = logProvider;
     }
 
+    ///<inheritdoc/>
     public string? GenerateJwt(Account account, string role, string sub, JwtType type)
     {
         try
@@ -73,6 +90,7 @@ internal class JwtProvider : IJwtProvider
         }
     }
 
+    ///<inheritdoc/>
     public bool ValidateJwt(string jwt, JwtType type)
     {
         try

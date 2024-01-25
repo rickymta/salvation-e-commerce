@@ -1,23 +1,52 @@
-﻿namespace Salvation.Library.Models.Entities
+﻿namespace Salvation.Library.Models.Entities;
+
+/// <summary>
+/// Base Entity
+/// </summary>
+public class BaseEntity
 {
-    public class BaseEntity
-    {
-        public string Id { get; set; } = null!;
+    /// <summary>
+    /// GUID
+    /// </summary>
+    public string Id { get; set; } = null!;
 
-        public bool IsActived { get; set; }
+    /// <summary>
+    /// IsActived
+    /// </summary>
+    public bool IsActived { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+    /// <summary>
+    /// CreatedAt
+    /// </summary>
+    public DateTime CreatedAt { get; set; }
 
-        public string? CreatedId { get; set; }
+    /// <summary>
+    /// CreatedId
+    /// </summary>
+    public string? CreatedId { get; set; }
 
-        public DateTime UpdatedAt { get; set; }
+    /// <summary>
+    /// UpdatedAt
+    /// </summary>
+    public DateTime? UpdatedAt { get; set; }
 
-        public string? UpdatedId { get; set; }
+    /// <summary>
+    /// UpdatedId
+    /// </summary>
+    public string? UpdatedId { get; set; }
 
-        public DateTime DeletedAt { get; set; }
+    /// <summary>
+    /// DeletedAt
+    /// </summary>
+    public DateTime? DeletedAt { get; set; }
 
-        public string? DeletedId { get; set; }
+    /// <summary>
+    /// DeletedId
+    /// </summary>
+    public string? DeletedId { get; set; }
 
-        public bool IsDeleted { get; set; }
-    }
+    /// <summary>
+    /// IsDeleted
+    /// </summary>
+    public bool IsDeleted { get; set; }
 }

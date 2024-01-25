@@ -5,101 +5,115 @@ using Salvation.Library.Infrastructure.Abstractions;
 using Salvation.Library.Models.Entities;
 using System.Data;
 
-namespace Salvation.Library.Infrastructure.Implementations
+namespace Salvation.Library.Infrastructure.Implementations;
+
+/// <inheritdoc/>
+internal class AccountRepository : GenericRepository, IAccountRepository
 {
-    internal class AccountRepository : GenericRepository, IAccountRepository
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="transaction"></param>
+    /// <param name="connection"></param>
+    /// <param name="logProvider"></param>
+    /// <param name="objectProvider"></param>
+    public AccountRepository(IDbTransaction transaction, IDbConnection connection, ILogProvider logProvider, IObjectProvider objectProvider) : base(transaction, connection, logProvider, objectProvider)
     {
-        public AccountRepository(IDbTransaction transaction, IDbConnection connection, ILogProvider logProvider, IObjectProvider objectProvider) : base(transaction, connection, logProvider, objectProvider)
-        {
-        }
+    }
 
-        public async Task<int> CreateAsync(Account entity)
+    /// <inheritdoc/>
+    public async Task<int> CreateAsync(Account entity)
+    {
+        try
         {
-            try
+            var sql = "INSERT INTO Account VALUES (@Id, @Email, @Fullname, @Password, @Address, @Avatar, @IsActived, @IsDeleted);";
+            var result = await Connection.ExecuteAsync(sql, entity);
+            return result;
+        }
+        catch (Exception ex)
+        {
+            _logProvider.Error(ex);
+            return 0;
+        }
+    }
+
+    /// <inheritdoc/>
+    public async Task<bool> DeleteAsync(string id)
+    {
+        try
+        {
+            var sql = "SELECT * FROM Account WHERE Id = @Id";
+            var find = await Connection.QueryFirstOrDefaultAsync<Account>(sql, param: new { Id = id }, transaction: Transaction);
+            
+            if (find != null)
             {
-                var sql = "INSERT INTO Account VALUES (@Id, @Email, @Fullname, @Password, @Address, @Avatar, @IsActived, @IsDeleted);";
-                var result = await Connection.ExecuteAsync(sql, entity);
+                var result = await Connection.DeleteAsync(find, transaction: Transaction);
                 return result;
             }
-            catch (Exception ex)
-            {
-                _logProvider.Error(ex);
-                return 0;
-            }
         }
-
-        public async Task<bool> DeleteAsync(string id)
+        catch (Exception ex)
         {
-            try
-            {
-                var sql = "SELECT * FROM Account WHERE Id = @Id";
-                var find = await Connection.QueryFirstOrDefaultAsync<Account>(sql, param: new { Id = id }, transaction: Transaction);
-                
-                if (find != null)
-                {
-                    var result = await Connection.DeleteAsync(find, transaction: Transaction);
-                    return result;
-                }
-            }
-            catch (Exception ex)
-            {
-                _logProvider.Error(ex);
-            }
-
-            return false;
+            _logProvider.Error(ex);
         }
 
-        public async Task<IEnumerable<Account>?> GetAllAsync()
+        return false;
+    }
+
+    /// <inheritdoc/>
+    public async Task<IEnumerable<Account>?> GetAllAsync()
+    {
+        try
         {
-            try
-            {
-                var sql = "SELECT * FROM Account";
-                var result = await Connection.QueryAsync<Account>(sql, transaction: Transaction);
-                return result;
-            }
-            catch (Exception ex)
-            {
-                _logProvider.Error(ex);
-            }
-
-            return null;
+            var sql = "SELECT * FROM Account";
+            var result = await Connection.QueryAsync<Account>(sql, transaction: Transaction);
+            return result;
         }
-
-        public async Task<Account?> GetAsync(string id)
+        catch (Exception ex)
         {
-            try
-            {
-                var sql = "SELECT * FROM Account WHERE Id = @Id";
-                var result = await Connection.QueryFirstOrDefaultAsync<Account>(sql, param: new { Id = id }, transaction: Transaction);
-                return result;
-            }
-            catch (Exception ex)
-            {
-                _logProvider.Error(ex);
-            }
-
-            return null;
+            _logProvider.Error(ex);
         }
 
-        public async Task<Account?> GetOneByEmail(string email)
+        return null;
+    }
+
+    /// <inheritdoc/>
+    public async Task<Account?> GetAsync(string id)
+    {
+        try
         {
-            try
-            {
-                var sql = "SELECT * FROM Account WHERE Email = @Email";
-                var result = await Connection.QueryFirstOrDefaultAsync<Account>(sql, param: new { Email = email }, transaction: Transaction);
-                return result;
-            }
-            catch (Exception ex)
-            {
-                _logProvider.Error(ex);
-            }
-
-            return null;
+            var sql = "SELECT * FROM Account WHERE Id = @Id";
+            var result = await Connection.QueryFirstOrDefaultAsync<Account>(sql, param: new { Id = id }, transaction: Transaction);
+            return result;
         }
-
-        public Task<bool> UpdateAsync(Account entity)
+        catch (Exception ex)
         {
-            throw new NotImplementedException();
+            _logProvider.Error(ex);
         }
+
+        return null;
+    }
+
+    /// <inheritdoc/>
+    public async Task<Account?> GetOneByEmail(string email)
+    {
+        try
+        {
+            var sql = "SELECT * FROM Account WHERE Email = @Email";
+            var result = await Connection.QueryFirstOrDefaultAsync<Account>(sql, param: new { Email = email }, transaction: Transaction);
+            return result;
+        }
+        catch (Exception ex)
+        {
+            _logProvider.Error(ex);
+        }
+
+        return null;
+    }
+
+    /// <inheritdoc/>
+    public Task<bool> UpdateAsync(Account entity)
+    {
+        // TODO: Implement update
+        throw new NotImplementedException();
     }
 }

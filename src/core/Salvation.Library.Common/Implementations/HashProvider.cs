@@ -5,10 +5,8 @@ using System.Text;
 
 namespace Salvation.Library.Common.Implementations;
 
-/// <summary>
-/// HashProvider
-/// </summary>
-public class HashProvider : IHashProvider
+///<inheritdoc/>
+internal class HashProvider : IHashProvider
 {
     ///<inheritdoc/>
     public string HashPassword(string password)
