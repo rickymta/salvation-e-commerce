@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\core\Salvation.Library.Common\Salvation.Library.Common.csproj" />
+    <ProjectReference Include="..\..\..\core\Salvation.Library.Infrastructure\Salvation.Library.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\core\Salvation.Library.Models\Salvation.Library.Models.csproj" />
+  </ItemGroup>
+
+</Project>
