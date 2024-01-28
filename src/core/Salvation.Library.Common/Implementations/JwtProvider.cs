@@ -38,7 +38,7 @@ internal class JwtProvider : IJwtProvider
     }
 
     ///<inheritdoc/>
-    public string? GenerateJwt(Account account, string role, string sub, JwtType type)
+    public string? GenerateJwt(Account account, string role, string audiencer, string issuer, JwtType type)
     {
         try
         {
@@ -54,7 +54,8 @@ internal class JwtProvider : IJwtProvider
                 Email = account.Email,
                 Fullname = account.Fullname,
                 Avatar = account.Avatar ??= string.Empty,
-                Sub = sub,
+                Audiencer = audiencer,
+                Issuer = issuer,
                 Role = role
             };
 
@@ -137,5 +138,46 @@ internal class JwtProvider : IJwtProvider
         }
 
         return false;
+    }
+
+    ///<inheritdoc/>
+    public (JwtHeader? header, JwtPayload? payload) DecodeJwt(string token, JwtType type)
+    {
+        if (ValidateJwt(token, type))
+        {
+            var jwtArr = token.Split('.');
+
+            if (jwtArr.Length == 3)
+            {
+                var headerBase64 = jwtArr[0];
+                var headerJson = _hashProvider.Base64Decode(headerBase64);
+                var payloadBase64 = jwtArr[1];
+                var payloadJson = _hashProvider.Base64Decode(payloadBase64);
+                var header = JsonConvert.DeserializeObject<JwtHeader>(headerJson);
+                var payload = JsonConvert.DeserializeObject<JwtPayload>(payloadJson);
+                return (header, payload);
+            }
+        }
+
+        return (null, null);
+    }
+
+    ///<inheritdoc/>
+    public JwtPayload? DecodeJwtToPayload(string token, JwtType type)
+    {
+        if (ValidateJwt(token, type))
+        {
+            var jwtArr = token.Split('.');
+
+            if (jwtArr.Length == 3)
+            {
+                var payloadBase64 = jwtArr[1];
+                var payloadJson = _hashProvider.Base64Decode(payloadBase64);
+                var payload = JsonConvert.DeserializeObject<JwtPayload>(payloadJson);
+                return payload;
+            }
+        }
+
+        return null;
     }
 }

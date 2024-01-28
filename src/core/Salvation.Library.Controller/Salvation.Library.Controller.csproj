@@ -7,11 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Common\" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <ProjectReference Include="..\Salvation.Library.Common\Salvation.Library.Common.csproj" />
+    <ProjectReference Include="..\Salvation.Library.Models\Salvation.Library.Models.csproj" />
   </ItemGroup>
 
 </Project>

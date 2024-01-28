@@ -94,8 +94,8 @@ internal class AccountService : IAccountService
 
         if (registerResult > 0)
         {
-            var accessToken = _jwtProvider.GenerateJwt(account, "Admin", "localhost", JwtType.AccessToken);
-            var refreshToken = _jwtProvider.GenerateJwt(account, "Admin", "localhost", JwtType.RefreshToken);
+            var accessToken = _jwtProvider.GenerateJwt(account, "Admin", "salvation-auth", "salvation-client", JwtType.AccessToken);
+            var refreshToken = _jwtProvider.GenerateJwt(account, "Admin", "salvation-auth", "salvation-client", JwtType.RefreshToken);
 
             return new LoginResponse
             {
@@ -121,8 +121,8 @@ internal class AccountService : IAccountService
             {
                 if (accountFind.IsActived && !accountFind.IsDeleted)
                 {
-                    var accessToken = _jwtProvider.GenerateJwt(accountFind, "Admin", "localhost", JwtType.AccessToken);
-                    var refreshToken = _jwtProvider.GenerateJwt(accountFind, "Admin", "localhost", JwtType.RefreshToken);
+                    var accessToken = _jwtProvider.GenerateJwt(accountFind, "Admin", "salvation-auth", "salvation-client", JwtType.AccessToken);
+                    var refreshToken = _jwtProvider.GenerateJwt(accountFind, "Admin", "salvation-auth", "salvation-client", JwtType.RefreshToken);
 
                     return new LoginResponse
                     {

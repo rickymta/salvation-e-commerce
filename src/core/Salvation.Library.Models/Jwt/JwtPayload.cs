@@ -31,9 +31,14 @@ public class JwtPayload
     public string Role { get; set; } = null!;
 
     /// <summary>
+    /// Hệ thống tạo ra token
+    /// </summary>
+    public string Audiencer { get; set; } = null!;
+
+    /// <summary>
     /// Hệ thống sẽ sử dụng token
     /// </summary>
-    public string Sub { get; set; } = null!;
+    public string Issuer { get; set; } = null!;
 
     /// <summary>
     /// Thời gian hết hạn

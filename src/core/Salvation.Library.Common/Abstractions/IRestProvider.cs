@@ -23,12 +23,12 @@ public interface IRestProvider
     public Task<HttpResponseMessage> CallJsonAsync(
         string url,
         HttpMethod httpMethod,
-        object body = null,
-        object queries = null,
-        IDictionary headers = null,
-        ContentType contentType = ContentType.Json,
-        bool recall = true,
-        int timeout = 600);
+        object? body = null,
+        object? queries = null,
+        IDictionary? headers = null,
+        ContentType? contentType = ContentType.Json,
+        bool? recall = true,
+        int? timeout = 600);
 
     /// <summary>
     /// ConvertObjectToList
