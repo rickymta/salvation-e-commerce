@@ -1,0 +1,61 @@
+﻿@using Salvation.Library.Models.ViewModels;
+@{
+    var categories = new List<CategoryViewModel>();
+
+    if (ViewBag.Categories != null)
+    {
+        categories = ViewBag.Categories;
+    }
+}
+
+<span class="category-header">Danh mục <i class="fa fa-list"></i></span>
+<ul class="category-list">
+    @if (categories != null && categories.Any())
+    {
+        foreach (var category in categories)
+        {
+            if (category.Children != null && category.Children.Any())
+            {
+                var subList = category.Children
+                .Select((item, index) => new { Item = item, Index = index })
+                .GroupBy(x => x.Index / 8)
+                .Select(group => group.Select(x => x.Item).ToList())
+                .ToList();
+
+                <li class="dropdown side-dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">@category.Name<i class="fa fa-angle-right"></i></a>
+                    <div class="custom-menu">
+                        <div class="row">
+                            @for (int i = 0; i < subList.Count(); i++)
+                            {
+                                <div class="col-md-4">
+                                    <ul class="list-links">
+                                        @foreach (var item in subList[i])
+                                        {
+                                            <li>
+                                                <a href="/san-pham/chi-tiet/danh-muc/@item.Slug">@item.Name</a>
+                                            </li>
+                                        }
+                                    </ul>
+                                    <hr class="hidden-md hidden-lg" />
+                                </div>
+                            }
+                            <div class="col-md-4 hidden-sm hidden-xs">
+                                <a class="banner banner-2" href="/san-pham/chi-tiet/danh-muc/@category.Slug">
+                                    <img src="~/assets/img/banner04.jpg" alt="" class="img-responsive" />
+                                    <div class="banner-caption">
+                                        <h3 class="white-color">@category.Name</h3>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            }
+            else
+            {
+                <li><a href='/san-pham/chi-tiet/danh-muc/@category.Slug'>@category.Name</a></li>
+            }
+        }
+    }
+</ul>

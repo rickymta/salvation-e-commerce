@@ -6,4 +6,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\core\Salvation.Library.Common\Salvation.Library.Common.csproj" />
+    <ProjectReference Include="..\..\core\Salvation.Library.Models\Salvation.Library.Models.csproj" />
+  </ItemGroup>
+
 </Project>

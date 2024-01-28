@@ -1,7 +1,13 @@
+using Salvation.Library.Common;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddMemoryCache();
+builder.Services.AddHttpContextAccessor();
+builder.Services.RegisterProviders();
 
 var app = builder.Build();
 
