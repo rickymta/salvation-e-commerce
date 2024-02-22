@@ -30,7 +30,8 @@ public interface ICoreApiProvider
         IDictionary? headers = null,
         ContentType contentType = ContentType.Json,
         string keyToken = "",
-        bool recall = true);
+        bool recall = true,
+        bool isExactUrl = false);
 
     /// <summary>
     /// PostCore
@@ -51,7 +52,8 @@ public interface ICoreApiProvider
         IDictionary? headers = null,
         ContentType contentType = ContentType.Json,
         string keyToken = "",
-        bool recall = true);
+        bool recall = true,
+        bool isExactUrl = false);
 
     /// <summary>
     /// GetCore
@@ -72,7 +74,8 @@ public interface ICoreApiProvider
         IDictionary? headers = null,
         ContentType contentType = ContentType.Json,
         string keyToken = "",
-        bool recall = true);
+        bool recall = true,
+        bool isExactUrl = false);
 
     /// <summary>
     /// PutCore
@@ -93,7 +96,8 @@ public interface ICoreApiProvider
         IDictionary? headers = null,
         ContentType contentType = ContentType.Json,
         string keyToken = "",
-        bool recall = true);
+        bool recall = true,
+        bool isExactUrl = false);
 
     /// <summary>
     /// DeleteCore
@@ -114,5 +118,6 @@ public interface ICoreApiProvider
         IDictionary? headers = null,
         ContentType contentType = ContentType.Json,
         string keyToken = "",
-        bool recall = true);
+        bool recall = true,
+        bool isExactUrl = false);
 }

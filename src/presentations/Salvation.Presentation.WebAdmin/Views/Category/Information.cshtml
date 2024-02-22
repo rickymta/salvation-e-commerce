@@ -1,0 +1,122 @@
+﻿@using Salvation.Library.Models.Entities;
+@using Salvation.Library.Models.ViewModels;
+
+@{
+    ViewData["Title"] = "Category Information";
+    var category = new Category();
+    var activedCategories = new List<CategoryViewModel>();
+
+    if (ViewBag.Category != null)
+    {
+        category = ViewBag.Category;
+    }
+
+    if (ViewBag.ActivedCategories != null)
+    {
+        activedCategories = ViewBag.ActivedCategories;
+    }
+}
+
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">Dashboard</h3>
+    </div>
+    <div class="col-md-7 align-self-center">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="javascript:void(0)">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+    </div>
+    <div>
+        <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10">
+            <i class="ti-settings text-white"></i>
+        </button>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="card-group">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <a href="/danh-muc/" class="btn btn-danger">Return</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-group">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <form role="form" action="">
+                            <div class="form-group">
+                                <label for="Name">Category Name</label>
+                                <input class="form-control" type="text" id="Name" name="Name" value="@category.Name" onkeyup="GenerateSlug()" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Slug">Category Slug</label>
+                                <input class="form-control" readonly type="text" id="Slug" name="Slug" value="@category.Slug" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Image">Category Image</label>
+                                <input class="form-control" type="text" id="Image" name="Image" value="@category.Image" onkeyup="ShowImage()" />
+                                <img class="img-fluid" id="ImageShow" style="width: 200px;" src="@category.Image" alt="@category.Name" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Parent Id</label>
+                                <select class="form-control" id="ParentId" name="ParentId">
+                                    <option value=""></option>
+                                    @if (activedCategories != null && activedCategories.Any())
+                                    {
+                                        foreach (var cat in activedCategories)
+                                        {
+                                            if (category.ParentId == cat.Id)
+                                            {
+                                                <option value="@cat.Id" selected>@cat.Name</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@cat.Id">@cat.Name</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="IsActived">Is Actived</label>
+                                <select class="form-control" id="IsActived" name="IsActived">
+                                    <option value="true">Enable</option>
+                                    <option value="false">Disable</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                @if (string.IsNullOrEmpty(category.Id))
+                                {
+                                    <button type="button" onclick="Create()" class="btn btn-success">Create</button>
+                                }
+                                else
+                                {
+                                    <button type="button" onclick="Update('@category.Id')" class="btn btn-success">Update</button>
+                                }
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/pages/category/category.js"></script>
+}

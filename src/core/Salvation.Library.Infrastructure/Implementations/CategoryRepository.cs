@@ -1,8 +1,12 @@
 ﻿using Dapper;
 using Salvation.Library.Common.Abstractions;
 using Salvation.Library.Infrastructure.Abstractions;
+using Salvation.Library.Models.Common;
 using Salvation.Library.Models.Entities;
+using Salvation.Library.Models.Filter;
 using System.Data;
+using static Dapper.SqlMapper;
+using static Slapper.AutoMapper;
 
 namespace Salvation.Library.Infrastructure.Implementations;
 
@@ -21,15 +25,90 @@ internal class CategoryRepository : GenericRepository, ICategoryRepository
     }
 
     /// <inheritdoc/>
-    public Task<int> CreateAsync(Category entity)
+    public async Task<int> CreateAsync(Category entity)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var sql = @"INSERT INTO Category
+                            (Id, Name, Slug, Image, ParentId, IsActived, CreatedAt, IsDeleted)
+                        VALUES
+                            (@Id, @Name, @Slug, @Image, @ParentId, @IsActived, @CreatedAt, @IsDeleted);";
+
+            var result = await Connection.ExecuteAsync(sql, entity);
+            return result;
+        }
+        catch (Exception ex)
+        {
+            _logProvider.Error(ex);
+        }
+
+        return 0;
     }
 
     /// <inheritdoc/>
-    public Task<bool> DeleteAsync(string id)
+    public async Task<bool> DeleteAsync(string id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var find = await GetAsync(id);
+
+            if (find != null)
+            {
+                var sql = @"DELETE FROM [Category] WHERE [Id] = @Id";
+                var result = await Connection.ExecuteAsync(sql, find);
+
+                if (result > 0)
+                {
+                    return true;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _logProvider.Error(ex);
+        }
+
+        return false;
+    }
+
+    /// <inheritdoc/>
+    public async Task<bool> UpdateAsync(Category entity)
+    {
+        try
+        {
+            var find = await GetAsync(entity.Id);
+
+            if (find != null)
+            {
+                var sql = @"UPDATE [Category]
+                        SET
+                            [Name] = @Name,
+                            [Slug] = @Slug,
+                            [Image] = @Image,
+                            [ParentId] = @ParentId,
+                            [IsActived] = @IsActived,
+                            [UpdatedAt] = @UpdatedAt,
+                            [UpdatedBy] = @UpdatedBy,
+                            [DeletedAt] = @DeletedAt,
+                            [DeletedBy] = @DeletedBy,
+                            [IsDeleted] = @IsDeleted
+                        WHERE
+                            [Id] = @Id";
+
+                var result = await Connection.ExecuteAsync(sql, entity);
+
+                if (result > 0)
+                {
+                    return true;
+                }
+            }    
+        }
+        catch (Exception ex)
+        {
+            _logProvider.Error(ex);
+        }
+
+        return false;
     }
 
     /// <inheritdoc/>
@@ -37,7 +116,7 @@ internal class CategoryRepository : GenericRepository, ICategoryRepository
     {
         try
         {
-            var sql = "SELECT * FROM Category";
+            var sql = "SELECT * FROM Category ORDER BY CreatedAt DESC";
             var result = await Connection.QueryAsync<Category>(sql);
             return result;
         }
@@ -64,12 +143,6 @@ internal class CategoryRepository : GenericRepository, ICategoryRepository
         }
 
         return null;
-    }
-
-    /// <inheritdoc/>
-    public Task<bool> UpdateAsync(Category entity)
-    {
-        throw new NotImplementedException();
     }
 
     /// <inheritdoc/>
@@ -104,5 +177,83 @@ internal class CategoryRepository : GenericRepository, ICategoryRepository
         }
 
         return null;
+    }
+
+    /// <inheritdoc/>
+    public async Task<DataPaging<Category>?> FilterDataPaging(CategoryFilter filter)
+    {
+        try
+        {
+            filter.Page ??= 0;
+            filter.Limit ??= 50;
+            int offset = filter.Page.Value * filter.Limit.Value;
+            filter.Offset = offset;
+            var condition = new List<string>();
+
+            if (!string.IsNullOrEmpty(filter.Name))
+            {
+                condition.Add("Name like '%@Name%'");
+            }
+
+            if (filter.IsActived != null)
+            {
+                condition.Add("IsActived = @IsActived");
+            }
+
+            var sqlCount = "SELECT COUNT(Id) FROM Category WHERE Id <> '' ";
+            var sql = "SELECT * FROM Category WHERE Id <> '' ";
+
+            if (condition.Any())
+            {
+                sqlCount += " AND " + $"{string.Join("AND", condition)}";
+                sql += " AND " + $"{string.Join("AND", condition)}";
+            }
+
+            sql += " ORDER BY CreatedAt OFFSET @Offset ROWS FETCH NEXT @Limit ROWS ONLY";
+            var count = await CountBySql(sqlCount, filter);
+            var data = await GetBySql(sql, filter);
+
+            return new DataPaging<Category> { Data = data, PaginationCount = count };
+        }
+        catch (Exception ex)
+        {
+            _logProvider.Error(ex);
+        }
+
+        return null;
+    }
+
+    private async Task<IEnumerable<Category>?> GetBySql(string sql, object filter)
+    {
+        try
+        {
+            var result = await Connection.QueryAsync<Category>(sql, filter, transaction: Transaction);
+            return result;
+        }
+        catch (Exception ex)
+        {
+            _logProvider.Error(ex);
+            return null;
+        }
+    }
+
+    private async Task<long> CountBySql(string sql, object filter)
+    {
+        try
+        {
+            var count = await Connection.QueryAsync<int>(sql, filter, transaction: Transaction);
+
+            if (!count.Any())
+            {
+                return 0;
+            }
+
+            return (long)count.First();
+        }
+        catch (Exception ex)
+        {
+            _logProvider.Error(ex);
+            return 0;
+        }
     }
 }

@@ -48,15 +48,7 @@ internal class RestProvider : IRestProvider
     }
 
     ///<inheritdoc/>
-    public async Task<HttpResponseMessage> CallJsonAsync(
-        string url,
-        HttpMethod httpMethod,
-        object body = null,
-        object queries = null,
-        IDictionary headers = null,
-        ContentType contentType = ContentType.Json,
-        bool recall = true,
-        int timeout = 600)
+    public async Task<HttpResponseMessage> CallJsonAsync(string url, HttpMethod httpMethod, object? body = null, object? queries = null, IDictionary? headers = null, ContentType? contentType = ContentType.Json, bool? recall = true, int? timeout = 600)
     {
         if (runFirstFlag)
         {
@@ -121,7 +113,7 @@ internal class RestProvider : IRestProvider
 
                 var cts = new CancellationTokenSource();
                 // time out
-                cts.CancelAfter(TimeSpan.FromSeconds(timeout));
+                cts.CancelAfter(TimeSpan.FromSeconds(timeout.Value));
 
                 result = await Client.SendAsync(httpRequestMessage, cts.Token);
                 // thoát vòng lặp
@@ -131,7 +123,7 @@ internal class RestProvider : IRestProvider
             {
                 _logProvider.Custom("error", $"CallAPI url {url} queries {_stringProvider.SerializeUtf8(queries)} method {httpMethod}");
                 // gọi lại nếu có lỗi
-                if (count < 3 && recall)
+                if (count < 3 && recall.Value)
                 {
                     count++;
                     queries = null;

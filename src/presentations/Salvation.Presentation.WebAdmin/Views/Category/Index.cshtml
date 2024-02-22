@@ -1,0 +1,144 @@
+﻿@using Salvation.Library.Models.Entities;
+@{
+    ViewData["Title"] = "Category";
+    var categories = new List<Category>();
+
+    if (ViewBag.Categories != null)
+    {
+        categories = ViewBag.Categories;
+    }
+}
+
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">Dashboard</h3>
+    </div>
+    <div class="col-md-7 align-self-center">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="javascript:void(0)">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+    </div>
+    <div>
+        <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10">
+            <i class="ti-settings text-white"></i>
+        </button>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="card-group">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <a href="/danh-muc/thong-tin/" class="btn btn-success">Create</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-group">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table table-bordered table-condensed table-striped" id="category-table" style="width: 100% !important; font-size: 12px">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Slug</td>
+                                    <td>Image</td>
+                                    <td>Status</td>
+                                    <td>Is Deleted</td>
+                                    <td>Action</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (categories != null && categories.Any())
+                                {
+                                    foreach (var category in categories)
+                                    {
+                                        <tr>
+                                            <td>@category.Name</td>
+                                            <td>@category.Slug</td>
+                                            <td>
+                                                <img class="img-fluid" style="width: 200px;" src="@category.Image" alt="@category.Name" />
+                                            </td>
+                                            <td>
+                                                @if (category.IsActived)
+                                                {
+                                                    <span class="badge badge-primary">Actived</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge badge-danger">In Actived</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (category.IsDeleted)
+                                                {
+                                                    <span class="badge badge-danger">Disabled</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge badge-primary">Enabled</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                <a href="/danh-muc/thong-tin/@category.Id" class="btn btn-sm btn-warning">Edit</a>
+                                                @if (category.IsActived)
+                                                {
+                                                    <button class="btn btn-sm btn-danger" onclick="Active('@category.Id', false)">Disable</button>
+                                                }
+                                                else
+                                                {
+                                                    <button class="btn btn-sm btn-info" onclick="Active('@category.Id', true)">Enable</button>
+                                                }
+                                                <button class="btn btn-sm btn-danger" onclick="Delete('@category.Id')">Delete</button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="categoryModalLabel">New Category</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Recipient:</label>
+                        <input type="text" class="form-control" id="recipient-name1">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Message:</label>
+                        <textarea class="form-control" id="message-text1"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/pages/category/category.js"></script>
+}

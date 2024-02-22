@@ -1,5 +1,7 @@
 ﻿using Salvation.Library.Infrastructure.Abstractions;
+using Salvation.Library.Models.Common;
 using Salvation.Library.Models.Entities;
+using Salvation.Library.Models.Filter;
 using Salvation.Library.Models.ViewModels;
 using Salvation.Library.Services.Categories.Abstractions;
 
@@ -25,10 +27,16 @@ internal class CategoryService : ICategoryService
     }
 
     /// <inheritdoc/>
-    public async Task<int> CreateAsync(Category entity)
+    public async Task<string> CreateAsync(Category entity)
     {
         var createResult = await _unitOfWork.Category.CreateAsync(entity);
-        return createResult;
+
+        if (createResult > 0)
+        {
+            return entity.Id;
+        }
+
+        return "";
     }
 
     /// <inheritdoc/>
@@ -105,6 +113,13 @@ internal class CategoryService : ICategoryService
             }
         }
 
+        return result;
+    }
+
+    /// <inheritdoc/>
+    public async Task<DataPaging<Category>?> FilterDataPaging(CategoryFilter filter)
+    {
+        var result = await _unitOfWork.Category.FilterDataPaging(filter);
         return result;
     }
 }

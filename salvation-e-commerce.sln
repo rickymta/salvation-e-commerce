@@ -30,8 +30,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salvation.Library.Infrastru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salvation.Library.Models", "src\core\Salvation.Library.Models\Salvation.Library.Models.csproj", "{B34D480E-7672-476C-ACC8-288CAA65C9BD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salvation.Presentation.WebAdmin", "src\presentations\Salvation.Presentation.WebAdmin\Salvation.Presentation.WebAdmin.csproj", "{EAE7C349-2977-4BCE-9DFC-E68169391867}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salvation.Library.Services.Test", "test\core\Salvation.Library.Services.Test\Salvation.Library.Services.Test.csproj", "{9E202C0A-FDED-4415-8C70-455AFC05DD66}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salvation.Presentation.WebAdmin.Test", "test\presentations\Salvation.Presentation.WebAdmin.Test\Salvation.Presentation.WebAdmin.Test.csproj", "{84A9F65A-EC4D-43C4-B2AE-A29BD9863CE0}"
@@ -60,17 +58,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salvation.Services.FileServ
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProductService", "ProductService", "{52E1A36F-8BD5-4725-859E-071570FC5751}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salvation.Services.ProductApi", "src\services\ProductService\Salvation.Services.ProductApi\Salvation.Services.ProductApi.csproj", "{C1D81A70-5A11-4D1A-8F6F-C78445BDF39F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salvation.Services.ProductApi", "src\services\ProductService\Salvation.Services.ProductApi\Salvation.Services.ProductApi.csproj", "{C1D81A70-5A11-4D1A-8F6F-C78445BDF39F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salvation.Handlers.Products", "src\services\ProductService\Salvation.Services.ProductHandler\Salvation.Handlers.Products.csproj", "{EB92AB98-071A-498D-995D-3F36E9CAAF98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salvation.Handlers.Products", "src\services\ProductService\Salvation.Services.ProductHandler\Salvation.Handlers.Products.csproj", "{EB92AB98-071A-498D-995D-3F36E9CAAF98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salvation.Services.Products", "src\services\ProductService\Salvation.Services.ProductService\Salvation.Services.Products.csproj", "{957EF269-D626-4899-8B20-7E71543CB884}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salvation.Services.Products", "src\services\ProductService\Salvation.Services.ProductService\Salvation.Services.Products.csproj", "{957EF269-D626-4899-8B20-7E71543CB884}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salvation.Services.Categories", "src\services\ProductService\Salvation.Services.CategoryService\Salvation.Services.Categories.csproj", "{EA819A3B-24E1-44B4-AE70-1F90720F9D8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salvation.Services.Categories", "src\services\ProductService\Salvation.Services.CategoryService\Salvation.Services.Categories.csproj", "{EA819A3B-24E1-44B4-AE70-1F90720F9D8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salvation.Services.Manufactures", "src\services\ProductService\Salvation.Services.ManufactureService\Salvation.Services.Manufactures.csproj", "{97C93AF2-3E38-44FC-9E75-8A84946BD3E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salvation.Services.Manufactures", "src\services\ProductService\Salvation.Services.ManufactureService\Salvation.Services.Manufactures.csproj", "{97C93AF2-3E38-44FC-9E75-8A84946BD3E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salvation.Library.Controller", "src\core\Salvation.Library.Controller\Salvation.Library.Controller.csproj", "{0AFD0E2D-5C3A-4620-8D22-1CB09F51CC81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salvation.Library.Controller", "src\core\Salvation.Library.Controller\Salvation.Library.Controller.csproj", "{0AFD0E2D-5C3A-4620-8D22-1CB09F51CC81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salvation.Presentation.WebAdmin", "src\presentations\Salvation.Presentation.WebAdmin\Salvation.Presentation.WebAdmin.csproj", "{CF08587D-0BC0-4D3E-AFB0-C814AB546AFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -90,10 +90,6 @@ Global
 		{B34D480E-7672-476C-ACC8-288CAA65C9BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B34D480E-7672-476C-ACC8-288CAA65C9BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B34D480E-7672-476C-ACC8-288CAA65C9BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EAE7C349-2977-4BCE-9DFC-E68169391867}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EAE7C349-2977-4BCE-9DFC-E68169391867}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EAE7C349-2977-4BCE-9DFC-E68169391867}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EAE7C349-2977-4BCE-9DFC-E68169391867}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9E202C0A-FDED-4415-8C70-455AFC05DD66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9E202C0A-FDED-4415-8C70-455AFC05DD66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E202C0A-FDED-4415-8C70-455AFC05DD66}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -158,6 +154,10 @@ Global
 		{0AFD0E2D-5C3A-4620-8D22-1CB09F51CC81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AFD0E2D-5C3A-4620-8D22-1CB09F51CC81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AFD0E2D-5C3A-4620-8D22-1CB09F51CC81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF08587D-0BC0-4D3E-AFB0-C814AB546AFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF08587D-0BC0-4D3E-AFB0-C814AB546AFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF08587D-0BC0-4D3E-AFB0-C814AB546AFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF08587D-0BC0-4D3E-AFB0-C814AB546AFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -172,7 +172,6 @@ Global
 		{7AA002A5-EE62-4A24-89B2-38761973E92A} = {87F4DB06-2D71-4539-B5D5-728BEB376963}
 		{525E40D5-3BF5-44EF-A8E8-E05E697D9A58} = {87F4DB06-2D71-4539-B5D5-728BEB376963}
 		{B34D480E-7672-476C-ACC8-288CAA65C9BD} = {87F4DB06-2D71-4539-B5D5-728BEB376963}
-		{EAE7C349-2977-4BCE-9DFC-E68169391867} = {3133A214-5905-4839-89B0-FC9C56C542A8}
 		{9E202C0A-FDED-4415-8C70-455AFC05DD66} = {EA04C837-9FC0-4579-B326-7855829B3FF6}
 		{84A9F65A-EC4D-43C4-B2AE-A29BD9863CE0} = {F9572950-ED59-4274-B731-CED4840BE65C}
 		{0DFA2489-EB20-47A1-9858-BF889EA3C90A} = {B385C821-FA3F-4BC0-8D19-5FCF3088CF98}
@@ -193,6 +192,7 @@ Global
 		{EA819A3B-24E1-44B4-AE70-1F90720F9D8D} = {52E1A36F-8BD5-4725-859E-071570FC5751}
 		{97C93AF2-3E38-44FC-9E75-8A84946BD3E8} = {52E1A36F-8BD5-4725-859E-071570FC5751}
 		{0AFD0E2D-5C3A-4620-8D22-1CB09F51CC81} = {87F4DB06-2D71-4539-B5D5-728BEB376963}
+		{CF08587D-0BC0-4D3E-AFB0-C814AB546AFE} = {3133A214-5905-4839-89B0-FC9C56C542A8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BA3597C9-2732-4BE0-9C97-4D446D273867}

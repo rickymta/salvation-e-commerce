@@ -24,9 +24,9 @@ go
 
 create table Category (
 	Id varchar(200) not null primary key,
-	Name varchar(50) not null unique,
+	Name nvarchar(200) not null unique,
 	Slug varchar(50) not null unique,
-	Image varchar(200) not null unique,
+	Image varchar(200),
 	ParentId varchar(200) default 0,
 	IsActived bit not null default 1,
 	CreatedAt datetime default getdate(),

@@ -33,8 +33,8 @@ builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
 var app = builder.Build();
 
 // Add custom middleware
-app.UseJwtMiddleware();
-app.UseGlobalErrorHandlingMiddleware();
+//app.UseJwtMiddleware();
+//app.UseGlobalErrorHandlingMiddleware();
 
 // use cors
 app.UseCors("corsapp");

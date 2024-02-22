@@ -33,28 +33,31 @@
                                         @foreach (var item in subList[i])
                                         {
                                             <li>
-                                                <a href="/san-pham/chi-tiet/danh-muc/@item.Slug">@item.Name</a>
+                                                <a href="/san-pham/danh-muc/@item.Slug">@item.Name</a>
                                             </li>
                                         }
                                     </ul>
                                     <hr class="hidden-md hidden-lg" />
                                 </div>
                             }
-                            <div class="col-md-4 hidden-sm hidden-xs">
-                                <a class="banner banner-2" href="/san-pham/chi-tiet/danh-muc/@category.Slug">
-                                    <img src="~/assets/img/banner04.jpg" alt="" class="img-responsive" />
-                                    <div class="banner-caption">
-                                        <h3 class="white-color">@category.Name</h3>
-                                    </div>
-                                </a>
-                            </div>
+                            @if (category.Image != null)
+                            {
+                                <div class="col-md-4 hidden-sm hidden-xs">
+                                    <a class="banner banner-2" href="/san-pham/danh-muc/@category.Slug">
+                                        <img src="@category.Image" alt="@category.Name" class="img-responsive" />
+                                        <div class="banner-caption">
+                                            <h3 class="white-color">@category.Name</h3>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
                         </div>
                     </div>
                 </li>
             }
             else
             {
-                <li><a href='/san-pham/chi-tiet/danh-muc/@category.Slug'>@category.Name</a></li>
+                <li><a href='/san-pham/danh-muc/@category.Slug'>@category.Name</a></li>
             }
         }
     }

@@ -1,4 +1,6 @@
-﻿using Salvation.Library.Models.Entities;
+﻿using Salvation.Library.Models.Common;
+using Salvation.Library.Models.Entities;
+using Salvation.Library.Models.Filter;
 
 namespace Salvation.Library.Infrastructure.Abstractions;
 
@@ -19,4 +21,11 @@ public interface ICategoryRepository : IGenericRepository<Category>
     /// <param name="parentId"></param>
     /// <returns></returns>
     Task<IEnumerable<Category>?> GetActiveChildrenCategoriesByParentId(string parentId);
+
+    /// <summary>
+    /// FilterDataPaging
+    /// </summary>
+    /// <param name="filter"></param>
+    /// <returns></returns>
+    Task<DataPaging<Category>?> FilterDataPaging(CategoryFilter filter);
 }

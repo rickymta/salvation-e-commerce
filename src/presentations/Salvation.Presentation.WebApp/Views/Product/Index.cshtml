@@ -1,5 +1,12 @@
-﻿@{
+﻿@using Salvation.Library.Models.ViewModels;
+@{
     ViewData["Title"] = "PRODUCT LIST";
+    var categories = new List<CategoryViewModel>();
+
+    if (ViewBag.Categories != null)
+    {
+        categories = ViewBag.Categories;
+    }
 }
 
 <section id="breadcrumb">
@@ -56,13 +63,15 @@
                 <aside class="aside">
                     <h3 class="aside-title">Lọc theo danh mục:</h3>
                     <ul class="size-option">
-                        <li><a href="">Laptop & phụ kiện</a></li>
-                        <li><a href="">Máy đồng bộ</a></li>
-                        <li><a href="">Máy chơi game</a></li>
-                        <li><a href="">Linh kiện máy tính</a></li>
-                        <li><a href="">Máy chủ & Máy trạm</a></li>
-                        <li><a href="">Gaming Gear & Console</a></li>
-                        <li><a href="">Giải pháp tản nhiệt</a></li>
+                        @if (categories != null && categories.Any())
+                        {
+                            foreach (var item in categories)
+                            {
+                                <li>
+                                    <a href="/san-pham/danh-muc/@item.Slug">@item.Name</a>
+                                </li>
+                            }
+                        }
                     </ul>
                 </aside>
 

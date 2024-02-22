@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Salvation.Library.Common.Abstractions;
+using Salvation.Library.Models.ViewModels;
 
 namespace Salvation.Presentation.WebApp.Controllers;
 
@@ -8,9 +10,39 @@ namespace Salvation.Presentation.WebApp.Controllers;
 [Route("san-pham")]
 public class ProductController : Controller
 {
-    [Route("{displayMode?}")]
-    public IActionResult Index(string? displayMode)
+    /// <summary>
+    /// ICoreApiProvider
+    /// </summary>
+    private readonly ICoreApiProvider _coreApiProvider;
+
+    /// <summary>
+    /// ILogProvider
+    /// </summary>
+    private readonly ILogProvider _logProvider;
+
+    public ProductController(ICoreApiProvider coreApiProvider, ILogProvider logProvider)
     {
+        _coreApiProvider = coreApiProvider;
+        _logProvider = logProvider;
+    }
+
+    [Route("danh-muc/{slug?}/{displayMode?}")]
+    public async Task<IActionResult> Index(string? slug, string? displayMode = "grid")
+    {
+        try
+        {
+            var categoriesResult = await _coreApiProvider.GetCore<List<CategoryViewModel>>("https://localhost:7041/api/category/get-active-categories", isExactUrl: true);
+
+            if (categoriesResult != null && categoriesResult.Code == 0 && categoriesResult.Data != null)
+            {
+                ViewBag.Categories = categoriesResult.Data;
+            }
+        }
+        catch (Exception ex)
+        {
+            _logProvider.Error(ex);
+        }
+
         return View();
     }
 

@@ -33,7 +33,7 @@ public class BaseEntity
     /// <summary>
     /// UpdatedId
     /// </summary>
-    public string? UpdatedId { get; set; }
+    public string? UpdatedBy { get; set; }
 
     /// <summary>
     /// DeletedAt
@@ -43,7 +43,7 @@ public class BaseEntity
     /// <summary>
     /// DeletedId
     /// </summary>
-    public string? DeletedId { get; set; }
+    public string? DeletedBy { get; set; }
 
     /// <summary>
     /// IsDeleted

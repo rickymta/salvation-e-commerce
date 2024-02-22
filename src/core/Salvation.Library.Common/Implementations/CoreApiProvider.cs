@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using Salvation.Library.Common.Abstractions;
 using Salvation.Library.Models.Enums;
 using Salvation.Library.Models.Response;
 using System.Collections;
 using System.Net;
-using System.Text.Json;
 
 namespace Salvation.Library.Common.Implementations;
 
@@ -59,9 +59,10 @@ internal class CoreApiProvider : ICoreApiProvider
         IDictionary? headers = null,
         ContentType contentType = ContentType.Json,
         string keyToken = "",
-        bool recall = true)
+        bool recall = true,
+        bool isExactUrl = false)
     {
-        url = ApiUrl + url;
+        url = !isExactUrl ? ApiUrl + url : url;
         string token = _httpContextAccessor.HttpContext.Request.Cookies[keyToken];
         headers = AddTokenToHeader(headers, token);
         var result = await _restProvider.CallJsonAsync(url, httpMethod, body, queries, headers, contentType, recall);
@@ -76,9 +77,10 @@ internal class CoreApiProvider : ICoreApiProvider
         IDictionary? headers = null,
         ContentType contentType = ContentType.Json,
         string keyToken = "",
-        bool recall = true)
+        bool recall = true,
+        bool isExactUrl = false)
     {
-        return await CallCoreApi<T>(url, HttpMethod.Post, body, queries, headers, contentType, keyToken, recall);
+        return await CallCoreApi<T>(url, HttpMethod.Post, body, queries, headers, contentType, keyToken, recall, isExactUrl);
     }
 
     ///<inheritdoc/>
@@ -89,9 +91,10 @@ internal class CoreApiProvider : ICoreApiProvider
         IDictionary? headers = null,
         ContentType contentType = ContentType.Json,
         string keyToken = "",
-        bool recall = true)
+        bool recall = true,
+        bool isExactUrl = false)
     {
-        return await CallCoreApi<T>(url, HttpMethod.Get, body, queries, headers, contentType, keyToken, recall);
+        return await CallCoreApi<T>(url, HttpMethod.Get, body, queries, headers, contentType, keyToken, recall, isExactUrl);
     }
 
     ///<inheritdoc/>
@@ -102,9 +105,10 @@ internal class CoreApiProvider : ICoreApiProvider
         IDictionary? headers = null,
         ContentType contentType = ContentType.Json,
         string keyToken = "",
-        bool recall = true)
+        bool recall = true,
+        bool isExactUrl = false)
     {
-        return await CallCoreApi<T>(url, HttpMethod.Put, body, queries, headers, contentType, keyToken, recall);
+        return await CallCoreApi<T>(url, HttpMethod.Put, body, queries, headers, contentType, keyToken, recall, isExactUrl);
     }
 
     ///<inheritdoc/>
@@ -115,9 +119,10 @@ internal class CoreApiProvider : ICoreApiProvider
         IDictionary? headers = null,
         ContentType contentType = ContentType.Json,
         string keyToken = "",
-        bool recall = true)
+        bool recall = true,
+        bool isExactUrl = false)
     {
-        return await CallCoreApi<T>(url, HttpMethod.Delete, body, queries, headers, contentType, keyToken, recall);
+        return await CallCoreApi<T>(url, HttpMethod.Delete, body, queries, headers, contentType, keyToken, recall, isExactUrl);
     }
 
     /// <summary>
@@ -132,8 +137,8 @@ internal class CoreApiProvider : ICoreApiProvider
         {
             string responseString = await message.Content.ReadAsStringAsync();
             message.Dispose();
-            ResponseObject<T> obj = JsonSerializer.Deserialize<ResponseObject<T>>(responseString);
-            return obj;
+            var result = JsonConvert.DeserializeObject<ResponseObject<T>>(responseString);
+            return result;
         }
         else if (message.StatusCode == HttpStatusCode.NotFound)
         {
