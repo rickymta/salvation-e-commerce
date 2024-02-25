@@ -209,7 +209,7 @@ internal class CategoryRepository : GenericRepository, ICategoryRepository
                 sql += " AND " + $"{string.Join("AND", condition)}";
             }
 
-            sql += " ORDER BY CreatedAt OFFSET @Offset ROWS FETCH NEXT @Limit ROWS ONLY";
+            sql += " ORDER BY CreatedAt DESC OFFSET @Offset ROWS FETCH NEXT @Limit ROWS ONLY";
             var count = await CountBySql(sqlCount, filter);
             var data = await GetBySql(sql, filter);
 

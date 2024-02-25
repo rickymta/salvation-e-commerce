@@ -70,18 +70,18 @@ namespace Salvation.Presentation.WebApp.Controllers
         {
             try
             {
-                var fileUpload = new FileUploadRequest
-                {
-                    FileUpload = file,
-                    AccountId = Guid.NewGuid().ToString(),
-                    ClientSystem = "customer-system",
-                    FileDirectory = "customer-avatar",
-                    FileName = file.FileName,
-                    FileSalt = Guid.NewGuid().ToString(),
-                    UploadTime = DateTime.Now,
-                };
+                //var fileUpload = new FileUploadRequest
+                //{
+                //    FileUpload = file,
+                //    AccountId = Guid.NewGuid().ToString(),
+                //    ClientSystem = "customer-system",
+                //    FileDirectory = "customer-avatar",
+                //    FileName = file.FileName,
+                //    FileSalt = Guid.NewGuid().ToString(),
+                //    UploadTime = DateTime.Now,
+                //};
 
-                var result = _customerApiProvider.PostCore<object>("FileUpload/handle-upload", fileUpload);
+                //var result = _customerApiProvider.PostCore<object>("FileUpload/handle-upload", fileUpload);
             }
             catch (Exception ex)
             {

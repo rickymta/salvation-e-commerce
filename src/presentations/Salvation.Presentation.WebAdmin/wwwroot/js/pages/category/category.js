@@ -1,76 +1,33 @@
-﻿//const PAGE_URL = '/danh-muc/';
-//let categoryTable;
+﻿let CategoryId = null;
 
-//$(function () {
-//    loadTableData();
-//})
+$(function () {
+    //$('#Image').change(function () {
+    //    const file = this.files[0];
+    //    if (file) {
+    //        const reader = new FileReader();
+    //        reader.onload = function (e) {
+    //            $('#ImageShow').attr('src', e.target.result);
+    //        }
+    //        reader.readAsDataURL(file);
+    //    }
+    //});
 
-//function reloadData() {
-//    $("#category-table").DataTable().ajax.reload(() => {
-//        categoryTable.page(0).draw('page');
-//    }, true);
-//}
-
-//function loadTableData() {
-//    categoryTable = $("#category-table").MainTables({
-//        'ajax': {
-//            'url': PAGE_URL + 'get-data',
-//            'type': 'POST',
-//            'data': function (d) {
-//                let filter = {};
-//                let nameSearch = $("#NameSearch").val();
-//                let status = $("#StatusSearch").val();
-
-//                if (nameSearch) {
-//                    filter.Name = nameSearch;
-//                }
-
-//                if (status) {
-//                    filter.Status = status
-//                }
-
-//                d.filter = filter;
-//            }
-//        },
-//        'column': [
-//            {
-//                'data': 'Name',
-//                'className': 'text-center'
-//            },
-//            {
-//                'data': 'Slug',
-//                'className': 'text-center'
-//            },
-//            {
-//                'data': 'Image',
-//                'className': 'text-center'
-//            },
-//            {
-//                'data': 'IsActived',
-//                'className': 'text-center'
-//            },
-//            {
-//                'data': 'IsDeleted',
-//                'className': 'text-center'
-//            },
-//            {
-//                'data': 'Id',
-//                'className': 'text-center',
-//                //'render': function (data, type, row) {
-//                //    return data;
-//                //}
-//            }
-//        ]
-//    });
-//}
+    $(".page-link").click(function (e) {
+        e.preventDefault();
+        let page = $(this).data("page");
+        let limit = $("#perpage").val();
+        console.log(page, limit);
+        window.location.href = `/danh-muc/${page}/${limit}`
+    })
+})
 
 async function Create() {
-    let Name = $("#Name").val();
-    let Slug = $("#Slug").val();
-    let Image = $("#Image").val();
-    let ParentId = $("#ParentId").val();
-    let IsActived = $("#IsActived").val();
-    let IsDeleted = !IsActived;
+    let Name = $("#Name").val()
+    let Slug = $("#Slug").val()
+    let Image = $("#Image").val()
+    let ParentId = $("#ParentId").val()
+    let IsActived = $("#IsActived").val()
+    let IsDeleted = !IsActived
 
     const category = { Name, Slug, Image, ParentId, IsActived, IsDeleted }
 
@@ -135,6 +92,42 @@ async function Update(Id) {
     }
 }
 
+async function Edit(Id) {
+    ClearModal();
+    CategoryId = Id;
+
+    const res = await AjaxProvider.Get({
+        url: "/danh-muc/chi-tiet/" + Id,
+    });
+
+    if (res.code == 0) {
+        $("#Name").val(res.data.name)
+        $("#Slug").val(res.data.slug)
+        $("#Image").val(res.data.image)
+        $("#ImageShow").attr("src", res.data.image)
+        $("#ParentId").val(res.data.parentId)
+        $("#IsActived").val(res.data.isActived + "")
+    }
+}
+
+function ClearModal() {
+    CategoryId = null;
+    $("#Name").val("")
+    $("#Slug").val("")
+    $("#Image").val("")
+    $("#ImageShow").attr("src", "")
+    $("#ParentId").val("")
+    $("#IsActived").val("")
+}
+
+function CreateOrUpdate() {
+    if (CategoryId != null) {
+        Update(CategoryId)
+    } else {
+        Create()
+    }
+}
+
 async function Active(Id, status) {
     const category = { Id, IsActived: status }
 
@@ -186,7 +179,40 @@ async function Delete(Id) {
 
 function ShowImage() {
     let Image = $("#Image").val();
-    $("#ImageShow").attr("src", Image)
+    if (Image != "") {
+        $("#ImageShow").attr("src", Image)
+    }
+}
+
+function UploadImage() {
+    var fileInput = document.getElementById('Image');
+    var file = fileInput.files[0];
+    var base64String = ""
+
+    if (file) {
+        console.log(file)
+        var reader = new FileReader();
+        reader.onload = async function (event) {
+            base64String = event.target.result.split(',')[1];
+
+            const res = await AjaxProvider.Post({
+                url: "/danh-muc/tai-file",
+                data: { FileString: base64String, FileName: file.name, FileSize: file.size, FileType: file.type }
+            });
+
+            if (res.code < 0) {
+                Swal.fire({
+                    title: "Lỗi",
+                    text: "Tải file thất bại! Vui lòng kiểm tra lại!",
+                    icon: "error",
+                });
+                return;
+            }
+        };
+        reader.readAsDataURL(file);
+    } else {
+        console.log('No file selected.');
+    }
 }
 
 function stringToSlug(str) {

@@ -5,6 +5,9 @@ using Salvation.Library.Models.Entities;
 using Salvation.Library.Models.Filter;
 using Salvation.Library.Models.Request;
 using Salvation.Library.Models.ViewModels;
+using Salvation.Presentation.WebAdmin.Models;
+using Salvation.Services.Models.Request;
+using System.Linq;
 
 namespace Salvation.Presentation.WebAdmin.Controllers;
 
@@ -20,58 +23,43 @@ public class CategoryController : Controller
         _coreApiProvider = coreApiProvider;
     }
 
-    [HttpGet("/danh-muc")]
-    public async Task<IActionResult> Index()
+    [HttpGet("/danh-muc/{page?}/{limit?}")]
+    public async Task<IActionResult> Index(int? page, int? limit)
     {
-        var data = await _coreApiProvider.GetCore<List<Category>>("https://localhost:7041/api/category/get-all-categories", isExactUrl: true);
-        ViewBag.Categories = data.Data;
-        return View();
-    }
+        limit ??= 10;
+        page ??= 1;
+        var offset = (page - 1) * limit;
 
-    [HttpGet("/danh-muc/thong-tin/{id?}")]
-    public async Task<IActionResult> Information(string? id)
-    {
-        if (!string.IsNullOrEmpty(id))
+        var filter = new CategoryFilter
         {
-            var data = await _coreApiProvider.GetCore<Category>("https://localhost:7041/api/category/get-category-by-id/" + id, isExactUrl: true);
-            ViewBag.Category = data.Data;
+            Limit = limit,
+            Offset = offset,
+            Page = page - 1
+        };
+
+        var data = await _coreApiProvider.PostCore<DataPaging<Category>>("https://localhost:7041/api/category/get-category-paging", filter, isExactUrl: true);
+
+        if (data != null && data.Data != null)
+        {
+            var totalRecord = data.Data.PaginationCount;
+            ViewBag.TotalRecord = totalRecord;
+            var totalPage = totalRecord % limit == 0 ? totalRecord / limit : totalRecord / limit + 1;
+            ViewBag.TotalPage = totalPage;
+            ViewBag.Categories = data.Data.Data;
         }
 
         var activedCategories = await _coreApiProvider.GetCore<List<CategoryViewModel>>("https://localhost:7041/api/category/get-active-categories", isExactUrl: true);
         ViewBag.ActivedCategories = activedCategories.Data;
+        ViewBag.CurrentPage = page;
+        ViewBag.Limit = limit;
         return View();
     }
 
-    [HttpPost("/danh-muc/get-data")]
-    public async Task<IActionResult> GetDataAsync(CategoryFilter filter, string start, string length)
+    [HttpGet("/danh-muc/chi-tiet/{id}")]
+    public async Task<IActionResult> CategoryDetail(string id)
     {
-        try
-        {
-            if (start != null)
-            {
-                var st = int.Parse(start);
-
-                if (length != null)
-                {
-                    var limit = int.Parse(length);
-
-                    if (limit != -1)
-                    {
-                        filter.Limit = limit;
-                    }
-
-                    filter.Page = st / limit;
-                }
-            }
-
-            var data = await _coreApiProvider.PostCore<DataPaging<Category>>("https://localhost:7041/api/category/get-category-paging", filter, isExactUrl: true);
-            return Ok(data.Data);
-        }
-        catch (Exception ex)
-        {
-            _logProvider.Error(ex);
-            return Ok(ex.Message);
-        }
+        var data = await _coreApiProvider.GetCore<Category>("https://localhost:7041/api/category/get-category-by-id/" + id, isExactUrl: true);
+        return Ok(data);
     }
 
     [HttpPost("/danh-muc/tao-moi")]

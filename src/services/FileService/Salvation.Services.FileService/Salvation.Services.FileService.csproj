@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\core\Salvation.Library.Common\Salvation.Library.Common.csproj" />
     <ProjectReference Include="..\..\..\core\Salvation.Library.Models\Salvation.Library.Models.csproj" />
   </ItemGroup>
 
